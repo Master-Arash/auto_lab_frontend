@@ -1,0 +1,36 @@
+import React, { useMemo } from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import useThemeStore from './stores/themeStore';
+
+function Main() {
+    const darkMode = useThemeStore((state) => state.darkMode);
+
+    const theme = useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    mode: darkMode ? 'dark' : 'light',
+                    primary: { main: '#2e7d32' },
+                },
+            }),
+        [darkMode]
+    );
+
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ThemeProvider>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <Main />
+    </React.StrictMode>
+);
