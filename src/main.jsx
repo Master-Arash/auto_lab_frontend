@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import {BrowserRouter} from 'react-router-dom';
+import {ThemeProvider, createTheme, CssBaseline} from '@mui/material';
 import useThemeStore from './stores/themeStore';
 
 function Main() {
@@ -13,7 +13,7 @@ function Main() {
             createTheme({
                 palette: {
                     mode: darkMode ? 'dark' : 'light',
-                    primary: { main: '#2e7d32' },
+                    primary: {main: '#2e7d32'},
                 },
             }),
         [darkMode]
@@ -21,9 +21,9 @@ function Main() {
 
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
+            <CssBaseline/>
             <BrowserRouter>
-                <App />
+                <App/>
             </BrowserRouter>
         </ThemeProvider>
     );
@@ -31,6 +31,6 @@ function Main() {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <Main />
+        <Main/>
     </React.StrictMode>
 );

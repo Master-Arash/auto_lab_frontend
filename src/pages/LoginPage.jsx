@@ -12,7 +12,7 @@ export default function LoginPage() {
         if (isLoggedIn) {
             navigate("/", {replace: true});
         }
-    })
+    }, [isLoggedIn])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -31,38 +31,38 @@ export default function LoginPage() {
     };
 
     return (<Container variant="standard">
-            <Box
-                sx={{
-                    marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center',
-                }}
-            >
-                <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                    <LockOutlined/>
-                </Avatar>
-                <Typography component="h1" variant="h5">
+        <Box
+            sx={{
+                marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center',
+            }}
+        >
+            <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                <LockOutlined/>
+            </Avatar>
+            <Typography component="h1" variant="h5">
+                ورود
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} sx={{mt: 1}}>
+                <TextField
+                    required fullWidth autoFocus name="username" autoComplete="username" margin="normal"
+                    label="نام کاربری" slotProps={{
+                    input: {
+                        startAdornment: (<InputAdornment position="start"><AccountCircle/></InputAdornment>),
+                    },
+                }} variant="outlined"
+                />
+                <TextField
+                    margin="normal" required fullWidth name="password" autoComplete="current-password"
+                    label="رمز عبور" type="password" slotProps={{
+                    input: {
+                        startAdornment: (<InputAdornment position="start"><Key/></InputAdornment>),
+                    },
+                }} variant="outlined"
+                />
+                <Button type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 2}}>
                     ورود
-                </Typography>
-                <Box component="form" onSubmit={handleSubmit} sx={{mt: 1}}>
-                    <TextField
-                        required fullWidth autoFocus name="username" autoComplete="username" margin="normal"
-                        label="نام کاربری" slotProps={{
-                        input: {
-                            startAdornment: (<InputAdornment position="start"><AccountCircle/></InputAdornment>),
-                        },
-                    }} variant="outlined"
-                    />
-                    <TextField
-                        margin="normal" required fullWidth name="password" autoComplete="current-password"
-                        label="رمز عبور" type="password" slotProps={{
-                        input: {
-                            startAdornment: (<InputAdornment position="start"><Key/></InputAdornment>),
-                        },
-                    }} variant="outlined"
-                    />
-                    <Button type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 2}}>
-                        ورود
-                    </Button>
-                </Box>
+                </Button>
             </Box>
-        </Container>);
+        </Box>
+    </Container>);
 }
