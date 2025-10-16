@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
-import { Box, Typography, Divider, List, ListItemButton, ListItemText, Avatar } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { Home, Settings, Info } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {
+    Box,
+    Typography,
+    Divider,
+    List,
+    ListItemButton,
+    ListItemText,
+    Avatar,
+    CardHeader,
+} from '@mui/material';
+import {useTheme} from '@mui/material/styles';
+import {Home, Settings, Info, Science} from '@mui/icons-material';
+import {useNavigate} from 'react-router-dom';
+import useAuthStore from "../stores/authStore.js"
+import RoleNumberToRole from "../assets/js/roleNumberToRole.js";
 
 const NAV_WIDTH = 220;
 const EDGE_WIDTH = 0;
@@ -18,6 +29,8 @@ export default function Sidebar() {
     const side = isRTL ? 'right' : 'left';
 
     const handleNavigate = (path) => navigate(path);
+
+    const { name, role, isLoggedIn, fetchUser } = useAuthStore();
 
     return (
         <Box
@@ -42,23 +55,29 @@ export default function Sidebar() {
             }}
         >
             {/* --- Top Section (Website name) --- */}
-            <Box sx={{ p: 2, whiteSpace: 'nowrap' }}>
+            <Box
+                sx={{p: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+            >
                 {hovered && (
                     <>
-                        <Typography variant="h6" fontWeight="bold">
-                            Auto Lab
-                        </Typography>
-                        <Divider sx={{ my: 1 }} />
+                        <CardHeader
+                            title="Auto Lab"
+                            action={<Box component="img" src="/logo.svg" sx={{width: 32, height: 32}}/>}
+                        />
+                        <Divider sx={{my: 2}}/>
                     </>
                 )}
             </Box>
 
             {/* --- Middle Section (Navigation) --- */}
-            <List sx={{ flexGrow: 1 }}>
+            <List sx={{flexGrow: 1}}>
                 {[
-                    { text: 'Dashboard', icon: <Home />, path: '/' },
-                    { text: 'Settings', icon: <Settings />, path: '/settings' },
-                    { text: 'About', icon: <Info />, path: '/about' },
+                    {text: 'Dashboard', icon: <Home/>, path: '/'},
+                    {text: 'Samples', icon: <Science/>, path: '/samples'},
+                    {text: 'Settings', icon: <Settings/>, path: '/settings'},
+                    {text: 'About', icon: <Info/>, path: '/about'},
                 ].map((item) => (
                     <ListItemButton
                         key={item.text}
@@ -72,8 +91,8 @@ export default function Sidebar() {
                         {hovered && (
                             <ListItemText
                                 primary={item.text}
-                                sx={{ ml: 2 }}
-                                primaryTypographyProps={{ noWrap: true }}
+                                sx={{ml: 2}}
+                                primaryTypographyProps={{noWrap: true}}
                             />
                         )}
                     </ListItemButton>
@@ -81,15 +100,15 @@ export default function Sidebar() {
             </List>
 
             {/* --- Bottom Section (User info) --- */}
-            <Box sx={{ p: 2, whiteSpace: 'nowrap' }}>
-                {hovered && <Divider sx={{ mb: 1 }} />}
+            <Box sx={{p: 2, whiteSpace: 'nowrap'}}>
+                {hovered && <Divider sx={{mb: 1}}/>}
                 <Box display="flex" alignItems="center" justifyContent={hovered ? 'flex-start' : 'center'}>
-                    <Avatar sx={{ width: 32, height: 32 }} />
+                    <Avatar sx={{width: 32, height: 32}}/>
                     {hovered && (
                         <Box ml={2}>
-                            <Typography variant="body2">Arash</Typography>
+                            <Typography variant="body2">{name}</Typography>
                             <Typography variant="caption" color="text.secondary">
-                                Admin
+                                {RoleNumberToRole(role)}
                             </Typography>
                         </Box>
                     )}

@@ -1,12 +1,14 @@
-import {Box, Card, CardContent, CardHeader, Typography} from "@mui/material";
+import {Box, Button, Card, CardContent, CardHeader, Typography} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 import {DataGrid} from "@mui/x-data-grid";
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import api from "../api.js";
 
 export default function SamplesPage() {
     const [samples, setSamples] = useState([]);
     const [rowCount, setRowCount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     // Use MUI pagination model
     const [paginationModel, setPaginationModel] = useState({
@@ -58,8 +60,14 @@ export default function SamplesPage() {
         field: "totalPrice", headerName: "Total Price", flex: 0.5, sortable: false, filterable: false
     }, {field: "totalGovPrice", headerName: "Total Gov Price", flex: 0.5, sortable: false, filterable: false},];
 
-    return (<Card>
-        <CardHeader title="Samples"/>
+    return (<Card sx={{margin: 2}}>
+        <CardHeader title="Samples"
+                    action={<Button variant="contained" onClick={() => {
+                        navigate("/add-sample", {replace: true})
+                    }}>
+                        Add
+                    </Button>}
+        />
         <CardContent>
             <DataGrid
                 rows={samples}

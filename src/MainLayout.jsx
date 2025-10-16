@@ -9,7 +9,7 @@ export default function MainLayout({ children }) {
     return (
         <Box display="flex" minHeight="100vh">
             <Sidebar onToggleTheme={toggleDarkMode} />
-            <Box flexGrow={1} p={2} sx={{ overflowX: 'hidden' }}>
+            <Box flexGrow={1} sx={{ overflowX: 'hidden' }}>
                 <Box sx={{ width: '100%', overflowX: 'hidden' }}>
                     {children}
                 </Box>
