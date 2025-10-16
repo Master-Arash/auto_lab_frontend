@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import api from "../api.js";
 import { useTranslation } from "react-i18next";
 
-export default function SamplesPage() {
+export default function TestsPage() {
   const [data, setData] = useState([]);
   const [rowCount, setRowCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -22,29 +22,18 @@ export default function SamplesPage() {
     async function fetchData() {
       setLoading(true);
       try {
-        const response = await api.get("/samples/", {
+        const response = await api.get("/tests/", {
           params: { page: paginationModel.page + 1 }, // DRF is 1-indexed
         });
 
         const raw_data = response.data.results || [];
         const rows = raw_data.map((data_item) => {
-          const totalPrice = (data_item.test || [])
-            .reduce((sum, t) => sum + (t.price || 0), 0)
-            .toLocaleString();
-          const totalGovPrice = (data_item.test || [])
-            .reduce((sum, t) => sum + (t.gov_price || 0), 0)
-            .toLocaleString();
-
           return {
             id: data_item.id,
             name: data_item.name,
             code: data_item.code,
-            categories: (data_item.category || [])
-              .map((i) => i.name)
-              .join(", "),
-            tests: (data_item.test || []).map((i) => i.name).join(", "),
-            totalPrice,
-            totalGovPrice,
+            price: data_item.price,
+            govPrice: data_item.gov_price,
           };
         });
 
@@ -76,29 +65,15 @@ export default function SamplesPage() {
       filterable: false,
     },
     {
-      field: "tests",
-      headerName: t("tests"),
-      flex: 1,
-      sortable: false,
-      filterable: false,
-    },
-    {
-      field: "categories",
-      headerName: t("categories"),
-      flex: 0.7,
-      sortable: false,
-      filterable: false,
-    },
-    {
-      field: "totalPrice",
-      headerName: t("total_price") + " (" + t("currency") + ")",
+      field: "price",
+      headerName: t("price") + " (" + t("currency") + ")",
       flex: 0.5,
       sortable: false,
       filterable: false,
     },
     {
-      field: "totalGovPrice",
-      headerName: t("total_gov_price") + " (" + t("currency") + ")",
+      field: "govPrice",
+      headerName: t("gov_price") + " (" + t("currency") + ")",
       flex: 0.5,
       sortable: false,
       filterable: false,
@@ -108,12 +83,12 @@ export default function SamplesPage() {
   return (
     <Card sx={{ margin: 2 }}>
       <CardHeader
-        title={t("samples")}
+        title={t("tests")}
         action={
           <Button
             variant="contained"
             onClick={() => {
-              navigate("/add-sample", { replace: true });
+              navigate("/add-test", { replace: true });
             }}
           >
             {t("add")}

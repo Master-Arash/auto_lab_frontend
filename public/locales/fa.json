@@ -11,11 +11,15 @@
   "total_gov_price": "تعرفه دولتی کلی",
   "currency": "ریال",
   "add_sample": "اضافه کردن نمونه",
+  "add_test": "اضافه کردن نمونه",
   "technician": "کارشناس",
   "reception": "پذیرش",
   "accountant": "مالی",
   "director": "مسئول فنی",
   "manager": "مدیر",
+  "gov_price": "تعرفه دولتی",
+  "price": "تعرفه",
+  "n2words_lang": "fa",
   "errors": {
     "unique_error": "وجود دارد"
   }

@@ -10,5 +10,7 @@ export default function RoleNumberToRole(roleNumber, t) {
       return t("director");
     case "5":
       return t("manager");
+    default:
+      return "";
   }
 }

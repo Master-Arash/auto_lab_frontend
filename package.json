@@ -21,6 +21,7 @@
     "@mui/x-date-pickers": "^8.14.0",
     "graphql": "^16.11.0",
     "i18next": "^25.6.0",
+    "n2words": "^1.23.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form-mui": "^8.0.0",

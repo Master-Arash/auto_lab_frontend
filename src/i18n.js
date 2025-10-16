@@ -7,14 +7,14 @@ async function loadLocale(locale) {
 }
 
 export async function initI18n() {
-  const enTranslations = await loadLocale("en");
+  const faTranslations = await loadLocale("fa");
 
   await i18n.use(initReactI18next).init({
     resources: {
-      en: { translation: enTranslations },
+      fa: { translation: faTranslations },
     },
-    lng: "en", // default language
-    fallbackLng: "en",
+    lng: "fa", // default language
+    fallbackLng: "fa",
     interpolation: { escapeValue: false },
   });
 }

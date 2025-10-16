@@ -4,6 +4,8 @@ import SamplesPage from "./pages/SamplesPage.jsx";
 import AddSamplePage from "./pages/AddSamplePage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import MainLayout from "./MainLayout.jsx";
+import TestsPage from "./pages/TestsPage.jsx";
+import AddTestPage from "./pages/AddTestsPage.jsx";
 
 function App() {
   return (
@@ -18,11 +20,30 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/tests"
+          element={
+            <ProtectedRoute>
+              <TestsPage />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/add-sample"
           element={
             <ProtectedRoute>
               <AddSamplePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/add-test"
+          element={
+            <ProtectedRoute>
+              <AddTestPage />
             </ProtectedRoute>
           }
         />
