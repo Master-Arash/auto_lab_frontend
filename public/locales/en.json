@@ -4,11 +4,18 @@
   "categories": "دسته بندی ها",
   "tests": "آزمون ها",
   "back": "بازگشت",
+  "add": "افزودن",
   "save": "ذخیره",
+  "samples": "نمونه ها",
   "total_price": "تعرفه کلی",
   "total_gov_price": "تعرفه دولتی کلی",
   "currency": "ریال",
   "add_sample": "اضافه کردن نمونه",
+  "technician": "کارشناس",
+  "reception": "پذیرش",
+  "accountant": "مالی",
+  "director": "مسئول فنی",
+  "manager": "مدیر",
   "errors": {
     "unique_error": "وجود دارد"
   }

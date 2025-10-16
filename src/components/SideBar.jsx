@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -10,10 +10,11 @@ import {
   CardHeader,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Home, Settings, Info, Science } from "@mui/icons-material";
+import { Science } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/authStore.js";
 import RoleNumberToRole from "../assets/js/roleNumberToRole.js";
+import { useTranslation } from "react-i18next";
 
 const NAV_WIDTH = 220;
 const EDGE_WIDTH = 0;
@@ -27,6 +28,8 @@ export default function Sidebar() {
   const isRTL = direction === "rtl";
 
   const side = isRTL ? "right" : "left";
+
+  const { t } = useTranslation();
 
   const handleNavigate = (path) => navigate(path);
 
@@ -85,17 +88,10 @@ export default function Sidebar() {
       {/* --- Middle Section (Navigation) --- */}
       <List sx={{ flexGrow: 1 }}>
         {[
-          { text: "Dashboard", icon: <Home />, path: "/" },
           {
-            text: "Samples",
+            text: t("samples"),
             icon: <Science />,
             path: "/samples",
-          },
-          { text: "Settings", icon: <Settings />, path: "/settings" },
-          {
-            text: "About",
-            icon: <Info />,
-            path: "/about",
           },
         ].map((item) => (
           <ListItemButton
@@ -131,7 +127,7 @@ export default function Sidebar() {
             <Box ml={2}>
               <Typography variant="body2">{name}</Typography>
               <Typography variant="caption" color="text.secondary">
-                {RoleNumberToRole(role)}
+                {RoleNumberToRole(role, t)}
               </Typography>
             </Box>
           )}

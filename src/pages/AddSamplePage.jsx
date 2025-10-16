@@ -6,7 +6,6 @@ import {
   CardContent,
   CardHeader,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import {
@@ -16,7 +15,7 @@ import {
   useForm,
 } from "react-hook-form-mui";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../api.js";
 import transformAutocompleteValues from "../assets/js/transformAutocompleteValues.js";
 
@@ -27,6 +26,7 @@ export default function AddSamplePage() {
   const [tests, setTests] = useState([]);
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
+  const back_url = "/samples";
 
   useEffect(() => {
     async function fetchData() {
@@ -64,7 +64,7 @@ export default function AddSamplePage() {
     try {
       const payload = transformAutocompleteValues(data);
       await api.post("/add-sample/", payload);
-      navigate("/samples", { replace: true });
+      navigate(back_url, { replace: true });
     } catch (err) {
       // Example backend error: [{ field: "name", message: "unique_error" }]
       const backendErrors = err.response?.data?.errors || [];
@@ -140,7 +140,7 @@ export default function AddSamplePage() {
         <CardActions sx={{ justifyContent: "flex-end", p: 3 }}>
           <Button
             variant="outlined"
-            onClick={() => navigate("/samples", { replace: true })}
+            onClick={() => navigate(back_url, { replace: true })}
           >
             {t("back")}
           </Button>

@@ -1,14 +1,14 @@
-export default function RoleNumberToRole(roleNumber) {
+export default function RoleNumberToRole(roleNumber, t) {
   switch (roleNumber) {
     case "1":
-      return "Technician";
+      return t("technician");
     case "2":
-      return "Reception";
+      return t("reception");
     case "3":
-      return "Accountant";
+      return t("accountant");
     case "4":
-      return "Director";
+      return t("director");
     case "5":
-      return "Manager";
+      return t("manager");
   }
 }

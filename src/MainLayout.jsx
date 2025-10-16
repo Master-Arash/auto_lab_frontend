@@ -1,4 +1,3 @@
-import React from "react";
 import { Box } from "@mui/material";
 import Sidebar from "./components/Sidebar"; // your sidebar component
 import useThemeStore from "./stores/themeStore";
