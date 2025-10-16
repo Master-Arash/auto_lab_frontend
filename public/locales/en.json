@@ -1,5 +1,15 @@
 {
+  "name": "نام",
+  "code": "کد",
+  "categories": "دسته بندی ها",
+  "tests": "آزمون ها",
+  "back": "بازگشت",
+  "save": "ذخیره",
+  "total_price": "تعرفه کلی",
+  "total_gov_price": "تعرفه دولتی کلی",
+  "currency": "ریال",
+  "add_sample": "اضافه کردن نمونه",
   "errors": {
-    "unique_error": "Already exists"
+    "unique_error": "وجود دارد"
   }
 }

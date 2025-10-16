@@ -1,119 +1,142 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
-    Box,
-    Typography,
-    Divider,
-    List,
-    ListItemButton,
-    ListItemText,
-    Avatar,
-    CardHeader,
-} from '@mui/material';
-import {useTheme} from '@mui/material/styles';
-import {Home, Settings, Info, Science} from '@mui/icons-material';
-import {useNavigate} from 'react-router-dom';
-import useAuthStore from "../stores/authStore.js"
+  Box,
+  Typography,
+  Divider,
+  List,
+  ListItemButton,
+  ListItemText,
+  Avatar,
+  CardHeader,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { Home, Settings, Info, Science } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../stores/authStore.js";
 import RoleNumberToRole from "../assets/js/roleNumberToRole.js";
 
 const NAV_WIDTH = 220;
 const EDGE_WIDTH = 0;
 
 export default function Sidebar() {
-    const theme = useTheme();
-    const [hovered, setHovered] = useState(false);
-    const navigate = useNavigate();
+  const theme = useTheme();
+  const [hovered, setHovered] = useState(false);
+  const navigate = useNavigate();
 
-    const direction = theme.direction; // 'ltr' or 'rtl'
-    const isRTL = direction === 'rtl';
+  const direction = theme.direction; // 'ltr' or 'rtl'
+  const isRTL = direction === "rtl";
 
-    const side = isRTL ? 'right' : 'left';
+  const side = isRTL ? "right" : "left";
 
-    const handleNavigate = (path) => navigate(path);
+  const handleNavigate = (path) => navigate(path);
 
-    const { name, role, isLoggedIn, fetchUser } = useAuthStore();
+  const { name, role } = useAuthStore();
 
-    return (
-        <Box
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+  return (
+    <Box
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      sx={{
+        position: "fixed",
+        top: 0,
+        bottom: 0,
+        [side]: 0,
+        width: hovered ? NAV_WIDTH : EDGE_WIDTH,
+        bgcolor: theme.palette.background.paper,
+        boxShadow: hovered ? 3 : 0,
+        transition: "width 0.3s ease",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        zIndex: 1000,
+        borderRight: !isRTL ? `1px solid ${theme.palette.divider}` : "none",
+        borderLeft: isRTL ? `1px solid ${theme.palette.divider}` : "none",
+      }}
+    >
+      {/* --- Top Section (Website name) --- */}
+      <Box
+        sx={{
+          p: 2,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {hovered && (
+          <>
+            <CardHeader
+              title="Auto Lab"
+              action={
+                <Box
+                  component="img"
+                  src="/logo.svg"
+                  sx={{ width: 32, height: 32 }}
+                />
+              }
+            />
+            <Divider sx={{ my: 2 }} />
+          </>
+        )}
+      </Box>
+
+      {/* --- Middle Section (Navigation) --- */}
+      <List sx={{ flexGrow: 1 }}>
+        {[
+          { text: "Dashboard", icon: <Home />, path: "/" },
+          {
+            text: "Samples",
+            icon: <Science />,
+            path: "/samples",
+          },
+          { text: "Settings", icon: <Settings />, path: "/settings" },
+          {
+            text: "About",
+            icon: <Info />,
+            path: "/about",
+          },
+        ].map((item) => (
+          <ListItemButton
+            key={item.text}
+            onClick={() => handleNavigate(item.path)}
             sx={{
-                position: 'fixed',
-                top: 0,
-                bottom: 0,
-                [side]: 0,
-                width: hovered ? NAV_WIDTH : EDGE_WIDTH,
-                bgcolor: theme.palette.background.paper,
-                boxShadow: hovered ? 3 : 0,
-                transition: 'width 0.3s ease',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                zIndex: 1000,
-                borderRight: !isRTL ? `1px solid ${theme.palette.divider}` : 'none',
-                borderLeft: isRTL ? `1px solid ${theme.palette.divider}` : 'none',
+              justifyContent: hovered ? "flex-start" : "center",
+              px: 2,
             }}
+          >
+            {item.icon}
+            {hovered && (
+              <ListItemText
+                primary={item.text}
+                sx={{ ml: 2 }}
+                primaryTypographyProps={{ noWrap: true }}
+              />
+            )}
+          </ListItemButton>
+        ))}
+      </List>
+
+      {/* --- Bottom Section (User info) --- */}
+      <Box sx={{ p: 2, whiteSpace: "nowrap" }}>
+        {hovered && <Divider sx={{ mb: 1 }} />}
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent={hovered ? "flex-start" : "center"}
         >
-            {/* --- Top Section (Website name) --- */}
-            <Box
-                sx={{p: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-            >
-                {hovered && (
-                    <>
-                        <CardHeader
-                            title="Auto Lab"
-                            action={<Box component="img" src="/logo.svg" sx={{width: 32, height: 32}}/>}
-                        />
-                        <Divider sx={{my: 2}}/>
-                    </>
-                )}
+          <Avatar sx={{ width: 32, height: 32 }} />
+          {hovered && (
+            <Box ml={2}>
+              <Typography variant="body2">{name}</Typography>
+              <Typography variant="caption" color="text.secondary">
+                {RoleNumberToRole(role)}
+              </Typography>
             </Box>
-
-            {/* --- Middle Section (Navigation) --- */}
-            <List sx={{flexGrow: 1}}>
-                {[
-                    {text: 'Dashboard', icon: <Home/>, path: '/'},
-                    {text: 'Samples', icon: <Science/>, path: '/samples'},
-                    {text: 'Settings', icon: <Settings/>, path: '/settings'},
-                    {text: 'About', icon: <Info/>, path: '/about'},
-                ].map((item) => (
-                    <ListItemButton
-                        key={item.text}
-                        onClick={() => handleNavigate(item.path)}
-                        sx={{
-                            justifyContent: hovered ? 'flex-start' : 'center',
-                            px: 2,
-                        }}
-                    >
-                        {item.icon}
-                        {hovered && (
-                            <ListItemText
-                                primary={item.text}
-                                sx={{ml: 2}}
-                                primaryTypographyProps={{noWrap: true}}
-                            />
-                        )}
-                    </ListItemButton>
-                ))}
-            </List>
-
-            {/* --- Bottom Section (User info) --- */}
-            <Box sx={{p: 2, whiteSpace: 'nowrap'}}>
-                {hovered && <Divider sx={{mb: 1}}/>}
-                <Box display="flex" alignItems="center" justifyContent={hovered ? 'flex-start' : 'center'}>
-                    <Avatar sx={{width: 32, height: 32}}/>
-                    {hovered && (
-                        <Box ml={2}>
-                            <Typography variant="body2">{name}</Typography>
-                            <Typography variant="caption" color="text.secondary">
-                                {RoleNumberToRole(role)}
-                            </Typography>
-                        </Box>
-                    )}
-                </Box>
-            </Box>
+          )}
         </Box>
-    );
+      </Box>
+    </Box>
+  );
 }

@@ -3,17 +3,17 @@ import { Navigate } from "react-router-dom";
 import useAuthStore from "../stores/authStore.js";
 
 function ProtectedRoute({ children }) {
-    const { isLoggedIn, loading } = useAuthStore();
+  const { isLoggedIn, loading } = useAuthStore();
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    if (!isLoggedIn) {
-        return <Navigate to="/login" replace />;
-    }
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
 
-    return children;
+  return children;
 }
 
 export default ProtectedRoute;

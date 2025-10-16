@@ -1,58 +1,70 @@
-import {create} from "zustand";
-import {persist} from "zustand/middleware";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import api from "../api.js";
 
-const useAuthStore = create(persist((set) => ({
-    isLoggedIn: false, name: "", role: "", loading: false,
+const useAuthStore = create(
+  persist(
+    (set) => ({
+      isLoggedIn: false,
+      name: "",
+      role: "",
+      loading: false,
 
-    // login function
-    login: async (credentials) => {
-        set({loading: true});
+      // login function
+      login: async (credentials) => {
+        set({ loading: true });
         try {
-            // Get CSRF first if required
-            await api.get("/csrf/");
-            // Login
-            await api.post("/login/", credentials);
-            // Fetch user info
-            const response = await api.get("/me/");
-            set({
-                isLoggedIn: true, name: response.data.name, role: response.data.role,
-            });
+          // Get CSRF first if required
+          await api.get("/csrf/");
+          // Login
+          await api.post("/login/", credentials);
+          // Fetch user info
+          const response = await api.get("/me/");
+          set({
+            isLoggedIn: true,
+            name: response.data.name,
+            role: response.data.role,
+          });
         } catch (err) {
-            console.error(err);
-            set({isLoggedIn: false, name: "", role: ""});
-            throw err;
+          console.error(err);
+          set({ isLoggedIn: false, name: "", role: "" });
+          throw err;
         } finally {
-            set({loading: false});
+          set({ loading: false });
         }
-    },
+      },
 
-    logout: async () => {
+      logout: async () => {
         try {
-            await api.post("/logout/"); // optional logout API
+          await api.post("/logout/"); // optional logout API
         } catch (err) {
-            console.error(err);
+          console.error(err);
         } finally {
-            set({isLoggedIn: false, name: "", role: ""});
+          set({ isLoggedIn: false, name: "", role: "" });
         }
-    },
+      },
 
-    fetchUser: async () => {
-        set({loading: true});
+      fetchUser: async () => {
+        set({ loading: true });
         try {
-            const response = await api.get("/me/");
-            set({
-                isLoggedIn: true, name: response.data.name, role: response.data.role,
-            });
+          const response = await api.get("/me/");
+          set({
+            isLoggedIn: true,
+            name: response.data.name,
+            role: response.data.role,
+          });
         } catch {
-            set({isLoggedIn: false, name: "", role: ""});
+          set({ isLoggedIn: false, name: "", role: "" });
         } finally {
-            set({loading: false});
+          set({ loading: false });
         }
+      },
+    }),
+    {
+      name: "auth-storage", // key in localStorage
+      getStorage: () => localStorage, // persist in localStorage
     },
-}), {
-    name: "auth-storage", // key in localStorage
-    getStorage: () => localStorage, // persist in localStorage
-}));
+  ),
+);
 
 export default useAuthStore;
