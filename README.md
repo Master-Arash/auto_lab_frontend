@@ -1,16 +1,40 @@
-# React + Vite
+# 🚧 LIMS — Laboratory Information Management Software (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Status:** 🧩 In Development  
+> This project is currently under active development. Features, structure, and UI are subject to change.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🖥️ Overview
 
-## React Compiler
+This is the **frontend** for a Laboratory Information Management System (LIMS), built using **React**, **Vite**, and **Material UI (MUI)** — along with several supporting libraries for routing, state management, and localization.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+It’s designed with **performance, scalability, and a clean developer experience** in mind.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧰 Tech Stack
+
+- ⚛️ **React 18**
+- ⚡ **Vite**
+- 🎨 **Material UI (MUI)**
+- 🌐 **React Router**
+- 🗂️ **Zustand** (state management)
+- 🌍 **i18next** (internationalization)
+- 🧪 **React Hook Form MUI**
+- 🔧 **Axios** (API integration)
+
+---
+
+## 📦 Installation
+
+```bash
+# Clone this repository
+git clone https://github.com/Master-Arash/auto_lab_frontend.git
+cd auto_lab_frontend
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
