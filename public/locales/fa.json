@@ -11,7 +11,8 @@
   "total_gov_price": "تعرفه دولتی کلی",
   "currency": "ریال",
   "add_sample": "اضافه کردن نمونه",
-  "add_test": "اضافه کردن نمونه",
+  "add_test": "اضافه کردن آزمون",
+  "duration": "مدت زمان مورد نیاز",
   "technician": "کارشناس",
   "reception": "پذیرش",
   "accountant": "مالی",
@@ -21,6 +22,8 @@
   "price": "تعرفه",
   "n2words_lang": "fa",
   "errors": {
-    "unique_error": "وجود دارد"
+    "unique_error": "وجود دارد",
+    "positive_int_error": "باید عددی طبیعی باشد",
+    "int_error": "باید عددی صحیح باشد"
   }
 }

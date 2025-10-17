@@ -25,7 +25,8 @@ export default function AddTestPage() {
       name: "",
       code: "",
       price: 0,
-      govPrice: 0,
+      gov_price: 0,
+      duration: 1,
     },
   });
 
@@ -90,6 +91,7 @@ export default function AddTestPage() {
                 type="number"
                 name="price"
                 label={t("price")}
+                required
                 fullWidth
               />
               <Typography>
@@ -103,6 +105,8 @@ export default function AddTestPage() {
                 type="number"
                 name="gov_price"
                 label={t("gov_price")}
+                required
+                inputProps={{ min: 0 }}
                 fullWidth
               />
               <Typography>
@@ -112,6 +116,13 @@ export default function AddTestPage() {
                   " " +
                   t("currency")}
               </Typography>
+              <TextFieldElement
+                type="number"
+                name="duration"
+                label={t("duration")}
+                required
+                fullWidth
+              />
             </Stack>
           </FormContainer>
         </CardContent>
