@@ -31,10 +31,10 @@ export default function AddSamplePage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const tests_list = (await api.get("/tests")).data;
+        const tests_list = (await api.get("/get-tests")).data;
         setTests(tests_list.map((test) => ({ id: test.id, label: test.name })));
 
-        const categories_list = (await api.get("/categories")).data;
+        const categories_list = (await api.get("/get-categories")).data;
         setCategories(
           categories_list.map((category) => ({
             id: category.id,
