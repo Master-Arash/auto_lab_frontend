@@ -5,7 +5,7 @@ import AddSamplePage from "./pages/AddSamplePage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import MainLayout from "./MainLayout.jsx";
 import TestsPage from "./pages/TestsPage.jsx";
-import AddTestPage from "./pages/AddTestsPage.jsx";
+import AddTestPage from "./pages/AddTestPage.jsx";
 import AddCategoryPage from "./pages/AddCategoryPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import EditCategoryPage from "./pages/EditCategoryPage.jsx";

@@ -1,7 +1,18 @@
-import { Box, Button, Card, CardContent, CardHeader } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import api from "../api.js";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +20,7 @@ export default function CategoriesPage() {
   const [data, setData] = useState([]);
   const [rowCount, setRowCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -17,33 +29,42 @@ export default function CategoriesPage() {
     pageSize: 30,
   });
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const response = await api.get("/categories/", {
-          params: { page: paginationModel.page + 1 },
-        });
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await api.get("/categories/", {
+        params: { page: paginationModel.page + 1 },
+      });
 
-        const rawData = response.data.results || [];
-        const rows = rawData.map((dataItem) => {
-          return {
-            id: dataItem.id,
-            name: dataItem.name,
-          };
-        });
+      const rawData = response.data.results || [];
+      const rows = rawData.map((item) => ({
+        id: item.id,
+        name: item.name,
+      }));
 
-        setData(rows);
-        setRowCount(response.data.count || 0);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+      setData(rows);
+      setRowCount(response.data.count || 0);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
-
-    fetchData();
   }, [paginationModel.page]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const handleDelete = async () => {
+    try {
+      await api.delete("/delete-category/", { data: { id: deleteId } });
+      await fetchData();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setDeleteId(null);
+    }
+  };
 
   const columns = [
     {
@@ -73,9 +94,7 @@ export default function CategoriesPage() {
             variant="outlined"
             color="error"
             size="small"
-            onClick={() =>
-              api.delete("/delete-category/", { data: { id: params.row.id } })
-            }
+            onClick={() => setDeleteId(params.row.id)}
             sx={{ mx: 1 }}
           >
             {t("delete")}
@@ -92,9 +111,7 @@ export default function CategoriesPage() {
         action={
           <Button
             variant="contained"
-            onClick={() => {
-              navigate("/add-category", { replace: true });
-            }}
+            onClick={() => navigate("/add-category", { replace: true })}
           >
             {t("add")}
           </Button>
@@ -112,13 +129,27 @@ export default function CategoriesPage() {
           pageSizeOptions={[30]}
           paginationMode="server"
           paginationModel={paginationModel}
-          onPaginationModelChange={(model) => setPaginationModel(model)}
+          onPaginationModelChange={setPaginationModel}
           sx={{
             "& .MuiDataGrid-cell:focus": { outline: "none" },
             "& .MuiDataGrid-columnHeader:focus": { outline: "none" },
           }}
         />
       </CardContent>
+
+      {/* 🧩 Confirm Delete Dialog */}
+      <Dialog open={!!deleteId} onClose={() => setDeleteId(null)}>
+        <DialogTitle>{t("confirm_delete_title")}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{t("confirm_delete_message")}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteId(null)}>{t("cancel")}</Button>
+          <Button onClick={handleDelete} color="error" variant="contained">
+            {t("delete")}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 }
