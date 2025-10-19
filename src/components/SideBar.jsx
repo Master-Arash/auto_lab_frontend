@@ -98,6 +98,11 @@ export default function Sidebar() {
             icon: <Science />,
             path: "/tests",
           },
+          {
+            text: t("categories"),
+            icon: <Science />,
+            path: "/categories",
+          },
         ].map((item) => (
           <ListItemButton
             key={item.text}

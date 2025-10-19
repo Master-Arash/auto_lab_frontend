@@ -1,18 +1,16 @@
-import { Button, Card, CardContent, CardHeader } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import api from "../api.js";
 import { useTranslation } from "react-i18next";
-import roleCheck from "../assets/js/roleCheck.js";
 
-export default function SamplesPage() {
+export default function CategoriesPage() {
   const [data, setData] = useState([]);
   const [rowCount, setRowCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [isPriceVisible, setIsPriceVisible] = useState(false);
 
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
@@ -23,32 +21,15 @@ export default function SamplesPage() {
     async function fetchData() {
       setLoading(true);
       try {
-        const response = await api.get("/samples/", {
+        const response = await api.get("/categories/", {
           params: { page: paginationModel.page + 1 },
         });
 
         const rawData = response.data.results || [];
-        let totalPrice;
-        let totalGovPrice;
         const rows = rawData.map((dataItem) => {
-          if (roleCheck("3")) {
-            setIsPriceVisible(true);
-            totalPrice = (dataItem.test || [])
-              .reduce((sum, t) => sum + (t.price || 0), 0)
-              .toLocaleString();
-            totalGovPrice = (dataItem.test || [])
-              .reduce((sum, t) => sum + (t.gov_price || 0), 0)
-              .toLocaleString();
-          }
-
           return {
             id: dataItem.id,
             name: dataItem.name,
-            code: dataItem.code,
-            categories: (dataItem.category || []).map((i) => i.name).join(", "),
-            tests: (dataItem.test || []).map((i) => i.name).join(", "),
-            totalPrice,
-            totalGovPrice,
           };
         });
 
@@ -66,63 +47,53 @@ export default function SamplesPage() {
 
   const columns = [
     {
-      field: "code",
-      headerName: t("code"),
-      flex: 0.5,
-      sortable: false,
-      filterable: false,
-    },
-    {
       field: "name",
       headerName: t("name"),
-      flex: 1,
+      flex: 2,
       sortable: false,
       filterable: false,
     },
     {
-      field: "tests",
-      headerName: t("tests"),
+      field: "actions",
+      headerName: t("actions"),
       flex: 1,
       sortable: false,
       filterable: false,
-    },
-    {
-      field: "categories",
-      headerName: t("categories"),
-      flex: 0.7,
-      sortable: false,
-      filterable: false,
+      renderCell: (params) => (
+        <Box>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="small"
+            onClick={() => navigate(`/edit-category/${params.row.id}`)}
+          >
+            {t("edit")}
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            size="small"
+            onClick={() =>
+              api.delete("/delete-category/", { data: { id: params.row.id } })
+            }
+            sx={{ mx: 1 }}
+          >
+            {t("delete")}
+          </Button>
+        </Box>
+      ),
     },
   ];
-
-  if (isPriceVisible) {
-    columns.push(
-      {
-        field: "totalPrice",
-        headerName: t("total_price") + " (" + t("currency") + ")",
-        flex: 0.5,
-        sortable: false,
-        filterable: false,
-      },
-      {
-        field: "totalGovPrice",
-        headerName: t("total_gov_price") + " (" + t("currency") + ")",
-        flex: 0.5,
-        sortable: false,
-        filterable: false,
-      },
-    );
-  }
 
   return (
     <Card sx={{ margin: 2 }}>
       <CardHeader
-        title={t("samples")}
+        title={t("categories")}
         action={
           <Button
             variant="contained"
             onClick={() => {
-              navigate("/add-sample", { replace: true });
+              navigate("/add-category", { replace: true });
             }}
           >
             {t("add")}

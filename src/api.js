@@ -12,7 +12,7 @@ const api = axios.create({
 api.defaults.xsrfCookieName = "csrftoken";
 api.defaults.xsrfHeaderName = "X-CSRFToken";
 
-let isCheckingAuth = false; // prevent multiple /me/ checks at once
+let isCheckingAuth = false;
 
 api.interceptors.response.use(
   (response) => response,
@@ -24,11 +24,8 @@ api.interceptors.response.use(
       isCheckingAuth = true;
 
       try {
-        // 👇 Try to verify session with /me/
         await api.get("/me/");
-        // If /me/ succeeds, user is actually still logged in → no redirect
       } catch {
-        // If /me/ also fails → user is not logged in
         if (window.location.pathname !== "/login") {
           window.location.href = "/login";
         }

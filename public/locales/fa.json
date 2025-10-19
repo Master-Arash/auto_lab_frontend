@@ -12,6 +12,9 @@
   "currency": "ریال",
   "add_sample": "اضافه کردن نمونه",
   "add_test": "اضافه کردن آزمون",
+  "add_category": "اضافه کردن دسته بندی",
+  "edit_category": "ویرایش دسته بندی",
+  "edit": "ویرایش",
   "duration": "مدت زمان مورد نیاز",
   "technician": "کارشناس",
   "reception": "پذیرش",
@@ -21,9 +24,11 @@
   "gov_price": "تعرفه دولتی",
   "price": "تعرفه",
   "n2words_lang": "fa",
+  "actions": "عملیات",
   "errors": {
     "unique_error": "وجود دارد",
     "positive_int_error": "باید عددی طبیعی باشد",
-    "int_error": "باید عددی صحیح باشد"
+    "int_error": "باید عددی صحیح باشد",
+    "required": "لطفا مقدار را وارد کنید"
   }
 }

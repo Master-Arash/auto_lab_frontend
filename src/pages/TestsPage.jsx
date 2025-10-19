@@ -4,6 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import api from "../api.js";
 import { useTranslation } from "react-i18next";
+import roleCheck from "../assets/js/roleCheck.js";
 
 export default function TestsPage() {
   const [data, setData] = useState([]);
@@ -11,11 +12,11 @@ export default function TestsPage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [isPriceVisible, setIsPriceVisible] = useState(false);
 
-  // Use MUI pagination model
   const [paginationModel, setPaginationModel] = useState({
-    page: 0, // 0-indexed
-    pageSize: 30, // fixed DRF page size
+    page: 0,
+    pageSize: 30,
   });
 
   useEffect(() => {
@@ -23,18 +24,24 @@ export default function TestsPage() {
       setLoading(true);
       try {
         const response = await api.get("/tests/", {
-          params: { page: paginationModel.page + 1 }, // DRF is 1-indexed
+          params: { page: paginationModel.page + 1 },
         });
 
         const raw_data = response.data.results || [];
         const rows = raw_data.map((data_item) => {
-          return {
+          let rows = {
             id: data_item.id,
             name: data_item.name,
             code: data_item.code,
-            price: data_item.price,
-            govPrice: data_item.gov_price,
           };
+
+          if (roleCheck("3")) {
+            setIsPriceVisible(true);
+            rows["price"] = data_item.price.toLocaleString();
+            rows["govPrice"] = data_item.gov_price.toLocaleString();
+          }
+
+          return rows;
         });
 
         setData(rows);
@@ -47,7 +54,7 @@ export default function TestsPage() {
     }
 
     fetchData();
-  }, [paginationModel.page]); // refetch when page changes
+  }, [paginationModel.page]);
 
   const columns = [
     {
@@ -64,21 +71,25 @@ export default function TestsPage() {
       sortable: false,
       filterable: false,
     },
-    {
-      field: "price",
-      headerName: t("price") + " (" + t("currency") + ")",
-      flex: 0.5,
-      sortable: false,
-      filterable: false,
-    },
-    {
-      field: "govPrice",
-      headerName: t("gov_price") + " (" + t("currency") + ")",
-      flex: 0.5,
-      sortable: false,
-      filterable: false,
-    },
   ];
+  if (isPriceVisible) {
+    columns.push(
+      {
+        field: "price",
+        headerName: t("price") + " (" + t("currency") + ")",
+        flex: 0.5,
+        sortable: false,
+        filterable: false,
+      },
+      {
+        field: "govPrice",
+        headerName: t("gov_price") + " (" + t("currency") + ")",
+        flex: 0.5,
+        sortable: false,
+        filterable: false,
+      },
+    );
+  }
 
   return (
     <Card sx={{ margin: 2 }}>

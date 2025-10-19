@@ -6,6 +6,9 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import MainLayout from "./MainLayout.jsx";
 import TestsPage from "./pages/TestsPage.jsx";
 import AddTestPage from "./pages/AddTestsPage.jsx";
+import AddCategoryPage from "./pages/AddCategoryPage.jsx";
+import CategoriesPage from "./pages/CategoriesPage.jsx";
+import EditCategoryPage from "./pages/EditCategoryPage.jsx";
 
 function App() {
   return (
@@ -31,6 +34,15 @@ function App() {
         />
 
         <Route
+          path="/categories"
+          element={
+            <ProtectedRoute>
+              <CategoriesPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/add-sample"
           element={
             <ProtectedRoute>
@@ -44,6 +56,23 @@ function App() {
           element={
             <ProtectedRoute>
               <AddTestPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/add-category"
+          element={
+            <ProtectedRoute>
+              <AddCategoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-category/:id"
+          element={
+            <ProtectedRoute>
+              <EditCategoryPage />
             </ProtectedRoute>
           }
         />
