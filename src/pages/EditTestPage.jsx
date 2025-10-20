@@ -8,62 +8,69 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import {
-  FormContainer,
-  TextFieldElement,
-  AutocompleteElement,
-  useForm,
-} from "react-hook-form-mui";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../api.js";
 import transformAutocompleteValues from "../assets/js/transformAutocompleteValues.js";
-
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import roleCheck from "../assets/js/roleCheck.js";
+import n2words from "n2words";
 
-export default function AddSamplePage() {
+export default function EditTestPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [tests, setTests] = useState([]);
-  const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
-  const back_url = "/samples";
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const tests_list = (await api.get("/get-tests")).data;
-        setTests(tests_list.map((test) => ({ id: test.id, label: test.name })));
-
-        const categories_list = (await api.get("/get-categories")).data;
-        setCategories(
-          categories_list.map((category) => ({
-            id: category.id,
-            label: category.name,
-          })),
-        );
-      } catch {
-        navigate("/login", { replace: true });
-      }
-    }
-
-    fetchData();
-  }, [navigate]);
+  const back_url = "/tests";
+  const [loading, setLoading] = useState(true);
 
   const formContext = useForm({
     defaultValues: {
       name: "",
       code: "",
-      categories: [],
-      tests: [],
+      gov_price: 0,
+      price: 0,
+      duration: 0,
     },
   });
+
+  if (!roleCheck("3")) {
+    navigate(back_url);
+  }
+
+  const { reset } = formContext;
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        let rawData = (await api.get("/get-tests", { params: { id } })).data;
+        rawData = Object.values(rawData)[0];
+
+        const data = {
+          id: rawData.id,
+          name: rawData.name,
+          code: rawData.code,
+          price: rawData.price,
+          gov_price: rawData.gov_price,
+          duration: rawData.duration,
+        };
+        reset(data);
+        setLoading(false);
+      } catch {
+        navigate(back_url, { replace: true });
+      }
+    }
+
+    fetchData();
+  }, [id, navigate, reset]);
 
   const { handleSubmit, setError } = formContext;
 
   const onSubmit = async (data) => {
     try {
-      const payload = transformAutocompleteValues(data);
-      await api.post("/add-sample/", payload);
+      let payload = transformAutocompleteValues(data);
+      payload["id"] = id;
+      await api.put("/edit-test/", payload);
       navigate(back_url, { replace: true });
     } catch (err) {
       const backendErrors = err.response?.data?.errors || [];
@@ -73,7 +80,7 @@ export default function AddSamplePage() {
       });
     }
   };
-
+  if (loading) return <Box />;
   return (
     <Box
       sx={{
@@ -95,7 +102,7 @@ export default function AddSamplePage() {
         <CardHeader
           title={
             <Typography variant="h5" fontWeight="bold">
-              {t("add_sample")}
+              {t("edit_test")}
             </Typography>
           }
         />
@@ -114,23 +121,41 @@ export default function AddSamplePage() {
                 autoFocus
               />
               <TextFieldElement name="code" label={t("code")} fullWidth />
-
-              <AutocompleteElement
-                name="categories"
-                label={t("categories")}
-                multiple
-                options={categories}
-                getOptionLabel={(option) => option.label}
+              <TextFieldElement
+                type="number"
+                name="price"
+                label={t("price")}
                 required
+                fullWidth
               />
-
-              <AutocompleteElement
-                name="tests"
-                label={t("tests")}
-                multiple
-                options={tests}
-                getOptionLabel={(option) => option.label}
+              <Typography>
+                {n2words(formContext.watch("price") || 0, {
+                  lang: t("n2words_lang"),
+                }) +
+                  " " +
+                  t("currency")}
+              </Typography>
+              <TextFieldElement
+                type="number"
+                name="gov_price"
+                label={t("gov_price")}
                 required
+                inputProps={{ min: 0 }}
+                fullWidth
+              />
+              <Typography>
+                {n2words(formContext.watch("gov_price") || 0, {
+                  lang: t("n2words_lang"),
+                }) +
+                  " " +
+                  t("currency")}
+              </Typography>
+              <TextFieldElement
+                type="number"
+                name="duration"
+                label={t("duration")}
+                required
+                fullWidth
               />
             </Stack>
           </FormContainer>

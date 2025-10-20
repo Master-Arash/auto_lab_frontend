@@ -24,7 +24,7 @@ export default function Sidebar() {
   const [hovered, setHovered] = useState(false);
   const navigate = useNavigate();
 
-  const direction = theme.direction; // 'ltr' or 'rtl'
+  const direction = theme.direction;
   const isRTL = direction === "rtl";
 
   const side = isRTL ? "right" : "left";
@@ -57,7 +57,6 @@ export default function Sidebar() {
         borderLeft: isRTL ? `1px solid ${theme.palette.divider}` : "none",
       }}
     >
-      {/* --- Top Section (Website name) --- */}
       <Box
         sx={{
           p: 2,
@@ -85,7 +84,6 @@ export default function Sidebar() {
         )}
       </Box>
 
-      {/* --- Middle Section (Navigation) --- */}
       <List sx={{ flexGrow: 1 }}>
         {[
           {
@@ -124,7 +122,6 @@ export default function Sidebar() {
         ))}
       </List>
 
-      {/* --- Bottom Section (User info) --- */}
       <Box sx={{ p: 2, whiteSpace: "nowrap" }}>
         {hovered && <Divider sx={{ mb: 1 }} />}
         <Box

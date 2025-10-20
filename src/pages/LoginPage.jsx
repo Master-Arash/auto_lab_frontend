@@ -10,7 +10,7 @@ import {
 import { AccountCircle, Key, LockOutlined } from "@mui/icons-material";
 import useAuthStore from "../stores/authStore.js";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react"; // for redirect
+import { useEffect } from "react";
 
 export default function LoginPage() {
   const login = useAuthStore((state) => state.login);

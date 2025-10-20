@@ -15,7 +15,7 @@ import transformAutocompleteValues from "../assets/js/transformAutocompleteValue
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 
-export default function AddCategoryPage() {
+export default function EditCategoryPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -33,7 +33,8 @@ export default function AddCategoryPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        let rawData = (await api.get("/get-categories", { data: { id } })).data;
+        let rawData = (await api.get("/get-categories", { params: { id } }))
+          .data;
         rawData = Object.values(rawData)[0];
 
         const data = {

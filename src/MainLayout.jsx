@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Sidebar from "./components/Sidebar"; // your sidebar component
+import Sidebar from "./components/Sidebar";
 import useThemeStore from "./stores/themeStore";
 
 export default function MainLayout({ children }) {

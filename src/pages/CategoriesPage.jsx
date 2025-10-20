@@ -137,7 +137,6 @@ export default function CategoriesPage() {
         />
       </CardContent>
 
-      {/* 🧩 Confirm Delete Dialog */}
       <Dialog open={!!deleteId} onClose={() => setDeleteId(null)}>
         <DialogTitle>{t("confirm_delete_title")}</DialogTitle>
         <DialogContent>

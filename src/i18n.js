@@ -13,7 +13,7 @@ export async function initI18n() {
     resources: {
       fa: { translation: faTranslations },
     },
-    lng: "fa", // default language
+    lng: "fa",
     fallbackLng: "fa",
     interpolation: { escapeValue: false },
   });

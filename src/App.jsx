@@ -9,6 +9,7 @@ import AddTestPage from "./pages/AddTestPage.jsx";
 import AddCategoryPage from "./pages/AddCategoryPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import EditCategoryPage from "./pages/EditCategoryPage.jsx";
+import EditTestPage from "./pages/EditTestPage.jsx";
 
 function App() {
   return (
@@ -73,6 +74,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditCategoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-test/:id"
+          element={
+            <ProtectedRoute>
+              <EditTestPage />
             </ProtectedRoute>
           }
         />

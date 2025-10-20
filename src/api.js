@@ -19,7 +19,6 @@ api.interceptors.response.use(
   async (error) => {
     const { response } = error;
 
-    // If 401 (unauthorized) and not already checking
     if (response && response.status === 403 && !isCheckingAuth) {
       isCheckingAuth = true;
 

@@ -10,15 +10,11 @@ const useAuthStore = create(
       role: "",
       loading: false,
 
-      // login function
       login: async (credentials) => {
         set({ loading: true });
         try {
-          // Get CSRF first if required
           await api.get("/csrf/");
-          // Login
           await api.post("/login/", credentials);
-          // Fetch user info
           const response = await api.get("/me/");
           set({
             isLoggedIn: true,
@@ -36,7 +32,7 @@ const useAuthStore = create(
 
       logout: async () => {
         try {
-          await api.post("/logout/"); // optional logout API
+          await api.post("/logout/");
         } catch (err) {
           console.error(err);
         } finally {
@@ -61,8 +57,8 @@ const useAuthStore = create(
       },
     }),
     {
-      name: "auth-storage", // key in localStorage
-      getStorage: () => localStorage, // persist in localStorage
+      name: "auth-storage",
+      getStorage: () => localStorage,
     },
   ),
 );

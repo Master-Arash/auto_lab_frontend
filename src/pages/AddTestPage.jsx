@@ -38,7 +38,6 @@ export default function AddTestPage() {
       await api.post("/add-test/", payload);
       navigate(back_url, { replace: true });
     } catch (err) {
-      // Example backend error: [{ field: "name", message: "unique_error" }]
       const backendErrors = err.response?.data?.errors || [];
       backendErrors.forEach(({ field, message }) => {
         message = t(field) + " " + t("errors." + message);
