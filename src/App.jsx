@@ -11,6 +11,9 @@ import CategoriesPage from "./pages/CategoriesPage.jsx";
 import EditCategoryPage from "./pages/EditCategoryPage.jsx";
 import EditTestPage from "./pages/EditTestPage.jsx";
 import EditSamplePage from "./pages/EditSamplePage.jsx";
+import UnitsPage from "./pages/UnitsPage.jsx";
+import AddUnitPage from "./pages/AddUnitPage.jsx";
+import EditUnitPage from "./pages/EditUnitPage.jsx";
 
 function App() {
   return (
@@ -42,6 +45,14 @@ function App() {
           }
         />
         <Route
+          path="/units"
+          element={
+            <ProtectedRoute>
+              <UnitsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/add-sample"
           element={
             <ProtectedRoute>
@@ -66,10 +77,26 @@ function App() {
           }
         />
         <Route
+          path="/add-unit"
+          element={
+            <ProtectedRoute>
+              <AddUnitPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/edit-category/:id"
           element={
             <ProtectedRoute>
               <EditCategoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-unit/:id"
+          element={
+            <ProtectedRoute>
+              <EditUnitPage />
             </ProtectedRoute>
           }
         />

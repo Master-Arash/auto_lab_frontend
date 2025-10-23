@@ -10,7 +10,7 @@ import {
   CardHeader,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Science } from "@mui/icons-material";
+import { Science, Biotech, Category, Straighten } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/authStore.js";
 import RoleNumberToRole from "../assets/js/roleNumberToRole.js";
@@ -93,13 +93,18 @@ export default function Sidebar() {
           },
           {
             text: t("tests"),
-            icon: <Science />,
+            icon: <Biotech />,
             path: "/tests",
           },
           {
             text: t("categories"),
-            icon: <Science />,
+            icon: <Category />,
             path: "/categories",
+          },
+          {
+            text: t("units"),
+            icon: <Straighten />,
+            path: "/units",
           },
         ].map((item) => (
           <ListItemButton

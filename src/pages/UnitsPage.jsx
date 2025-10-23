@@ -16,7 +16,7 @@ import { useCallback, useEffect, useState } from "react";
 import api from "../api.js";
 import { useTranslation } from "react-i18next";
 
-export default function CategoriesPage() {
+export default function UnitsPage() {
   const [data, setData] = useState([]);
   const [rowCount, setRowCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ export default function CategoriesPage() {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await api.get("/categories/", {
+      const response = await api.get("/units/", {
         params: { page: paginationModel.page + 1 },
       });
 
@@ -58,7 +58,7 @@ export default function CategoriesPage() {
 
   const handleDelete = async () => {
     try {
-      await api.delete("/delete-category/", { data: { id: deleteId } });
+      await api.delete("/delete-unit/", { data: { id: deleteId } });
       await fetchData();
     } catch (err) {
       console.error(err);
@@ -87,7 +87,7 @@ export default function CategoriesPage() {
             variant="outlined"
             color="primary"
             size="small"
-            onClick={() => navigate(`/edit-category/${params.row.id}`)}
+            onClick={() => navigate(`/edit-unit/${params.row.id}`)}
           >
             {t("edit")}
           </Button>
@@ -111,11 +111,11 @@ export default function CategoriesPage() {
   return (
     <Card sx={{ margin: 2 }}>
       <CardHeader
-        title={t("categories")}
+        title={t("units")}
         action={
           <Button
             variant="contained"
-            onClick={() => navigate("/add-category", { replace: true })}
+            onClick={() => navigate("/add-unit", { replace: true })}
           >
             {t("add")}
           </Button>
