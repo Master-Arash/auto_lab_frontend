@@ -8,8 +8,6 @@ import {
   ListItemText,
   Avatar,
   CardHeader,
-  FormControlLabel,
-  Switch,
   Tooltip,
   IconButton,
 } from "@mui/material";
