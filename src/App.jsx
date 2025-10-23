@@ -10,6 +10,7 @@ import AddCategoryPage from "./pages/AddCategoryPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import EditCategoryPage from "./pages/EditCategoryPage.jsx";
 import EditTestPage from "./pages/EditTestPage.jsx";
+import EditSamplePage from "./pages/EditSamplePage.jsx";
 
 function App() {
   return (
@@ -24,7 +25,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/tests"
           element={
@@ -33,7 +33,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/categories"
           element={
@@ -42,7 +41,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/add-sample"
           element={
@@ -51,7 +49,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/add-test"
           element={
@@ -60,7 +57,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/add-category"
           element={
@@ -82,6 +78,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditTestPage />
+            </ProtectedRoute>
+          }
+        />{" "}
+        <Route
+          path="/edit-sample/:id"
+          element={
+            <ProtectedRoute>
+              <EditSamplePage />
             </ProtectedRoute>
           }
         />
