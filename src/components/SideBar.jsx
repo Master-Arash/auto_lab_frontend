@@ -8,13 +8,25 @@ import {
   ListItemText,
   Avatar,
   CardHeader,
+  FormControlLabel,
+  Switch,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { Science, Biotech, Category, Straighten } from "@mui/icons-material";
+import {
+  Science,
+  Biotech,
+  Category,
+  Straighten,
+  Brightness7,
+  Brightness4,
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/authStore.js";
 import RoleNumberToRole from "../assets/js/roleNumberToRole.js";
 import { useTranslation } from "react-i18next";
+import useThemeStore from "../stores/themeStore";
 
 const NAV_WIDTH = 220;
 const EDGE_WIDTH = 0;
@@ -34,6 +46,8 @@ export default function Sidebar() {
   const handleNavigate = (path) => navigate(path);
 
   const { name, role } = useAuthStore();
+
+  const { darkMode, toggleDarkMode } = useThemeStore();
 
   return (
     <Box
@@ -136,11 +150,29 @@ export default function Sidebar() {
         >
           <Avatar sx={{ width: 32, height: 32 }} />
           {hovered && (
-            <Box ml={2}>
-              <Typography variant="body2">{name}</Typography>
-              <Typography variant="caption" color="text.secondary">
-                {RoleNumberToRole(role, t)}
-              </Typography>
+            <Box
+              ml={2}
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{ width: "100%" }}
+            >
+              <Box>
+                <Typography variant="body2">{name}</Typography>
+                <Typography variant="caption" color="text.secondary">
+                  {RoleNumberToRole(role, t)}
+                </Typography>
+              </Box>
+
+              <Tooltip title={darkMode ? "Light mode" : "Dark mode"}>
+                <IconButton
+                  size="small"
+                  color="inherit"
+                  onClick={toggleDarkMode}
+                >
+                  {darkMode ? <Brightness7 /> : <Brightness4 />}
+                </IconButton>
+              </Tooltip>
             </Box>
           )}
         </Box>
