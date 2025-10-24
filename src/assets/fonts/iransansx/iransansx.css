@@ -1,0 +1,62 @@
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-UltraLight.woff2") format("woff2");
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-DemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-ExtraBold.woff2") format("woff2");
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IRANSansX";
+    src: url("./IRANSansX-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-display: swap;
+}

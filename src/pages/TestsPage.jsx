@@ -11,11 +11,11 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { DataGrid } from "@mui/x-data-grid";
 import { useCallback, useEffect, useState } from "react";
 import api from "../api.js";
 import { useTranslation } from "react-i18next";
 import roleCheck from "../assets/js/roleCheck.js";
+import BaseDataGrid from "../components/BaseDataGrid.jsx";
 
 export default function TestsPage() {
   const [data, setData] = useState([]);
@@ -162,22 +162,13 @@ export default function TestsPage() {
         }
       />
       <CardContent>
-        <DataGrid
+        <BaseDataGrid
           rows={data}
           columns={columns}
           rowCount={rowCount}
           loading={loading}
-          disableColumnMenu
-          disableColumnResize
-          disableRowSelectionOnClick
-          pageSizeOptions={[30]}
-          paginationMode="server"
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          sx={{
-            "& .MuiDataGrid-cell:focus": { outline: "none" },
-            "& .MuiDataGrid-columnHeader:focus": { outline: "none" },
-          }}
         />
       </CardContent>
 
