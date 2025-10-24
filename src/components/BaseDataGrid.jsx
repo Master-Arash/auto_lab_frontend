@@ -49,6 +49,10 @@ export default function BaseDataGrid({
               : theme.palette.action.selected,
         },
 
+        "& .MuiDataGrid-columnSeparator": {
+          color: "transparent !important",
+        },
+
         "& .MuiDataGrid-row.Mui-selected": {
           backgroundColor:
             theme.palette.mode === "light"
