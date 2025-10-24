@@ -1,6 +1,5 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { alpha, useTheme } from "@mui/material/styles";
 
 export default function BaseDataGrid({
   rows,
@@ -12,8 +11,6 @@ export default function BaseDataGrid({
   pageSizeOptions = [30],
   ...props
 }) {
-  const theme = useTheme();
-
   return (
     <DataGrid
       rows={rows}
@@ -34,12 +31,10 @@ export default function BaseDataGrid({
         "& .MuiDataGrid-cell:focus": { outline: "none" },
         "& .MuiDataGrid-columnHeader:focus": { outline: "none" },
 
-        // smooth hover & stripe transitions
         "& .MuiDataGrid-row": {
           transition: "background-color 120ms ease",
         },
 
-        // even rows: light tint for striping
         "& .MuiDataGrid-row.even": {
           backgroundColor:
             theme.palette.mode === "light"
@@ -47,7 +42,6 @@ export default function BaseDataGrid({
               : theme.palette.grey[900],
         },
 
-        // hover effect over any row
         "& .MuiDataGrid-row:hover": {
           backgroundColor:
             theme.palette.mode === "light"
@@ -55,7 +49,6 @@ export default function BaseDataGrid({
               : theme.palette.action.selected,
         },
 
-        // keep selected row color clear
         "& .MuiDataGrid-row.Mui-selected": {
           backgroundColor:
             theme.palette.mode === "light"
