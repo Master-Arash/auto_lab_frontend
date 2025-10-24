@@ -14,6 +14,9 @@ import EditSamplePage from "./pages/EditSamplePage.jsx";
 import UnitsPage from "./pages/UnitsPage.jsx";
 import AddUnitPage from "./pages/AddUnitPage.jsx";
 import EditUnitPage from "./pages/EditUnitPage.jsx";
+import EditReferenceStandardPage from "./pages/EditReferenceStandardPage.jsx";
+import AddReferenceStandardPage from "./pages/AddReferenceStandardPage.jsx";
+import ReferenceStandardsPage from "./pages/ReferenceStandardsPage.jsx";
 
 function App() {
   return (
@@ -53,6 +56,14 @@ function App() {
           }
         />
         <Route
+          path="/reference-standards"
+          element={
+            <ProtectedRoute>
+              <ReferenceStandardsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/add-sample"
           element={
             <ProtectedRoute>
@@ -85,6 +96,14 @@ function App() {
           }
         />
         <Route
+          path="/add-reference-standard"
+          element={
+            <ProtectedRoute>
+              <AddReferenceStandardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/edit-category/:id"
           element={
             <ProtectedRoute>
@@ -97,6 +116,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditUnitPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-reference-standard/:id"
+          element={
+            <ProtectedRoute>
+              <EditReferenceStandardPage />
             </ProtectedRoute>
           }
         />

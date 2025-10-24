@@ -17,6 +17,7 @@ import {
   Biotech,
   Category,
   Straighten,
+  Source,
   Brightness7,
   Brightness4,
 } from "@mui/icons-material";
@@ -117,6 +118,11 @@ export default function Sidebar() {
             text: t("units"),
             icon: <Straighten />,
             path: "/units",
+          },
+          {
+            text: t("reference_standards"),
+            icon: <Source />,
+            path: "/reference-standards",
           },
         ].map((item) => (
           <ListItemButton
