@@ -19,6 +19,7 @@ import {
   Straighten,
   Source,
   Contacts,
+  Extension,
   Brightness7,
   Brightness4,
 } from "@mui/icons-material";
@@ -129,6 +130,11 @@ export default function Sidebar() {
             text: t("requesters"),
             icon: <Contacts />,
             path: "/requesters",
+          },
+          {
+            text: t("technician_abilities"),
+            icon: <Extension />,
+            path: "/select-technician",
           },
         ].map((item) => (
           <ListItemButton

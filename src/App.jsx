@@ -20,6 +20,8 @@ import ReferenceStandardsPage from "./pages/ReferenceStandardsPage.jsx";
 import EditRequesterPage from "./pages/EditRequesterPage.jsx";
 import AddRequesterPage from "./pages/AddRequesterPage.jsx";
 import RequestersPage from "./pages/RequestersPage.jsx";
+import SelectTechnicianPage from "./pages/SelectTechnicianPage.jsx";
+import TechnicianAbilitiesPage from "./pages/TechnicianAbilitiesPage.jsx";
 
 function App() {
   return (
@@ -167,6 +169,22 @@ function App() {
           element={
             <ProtectedRoute>
               <EditSamplePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/select-technician"
+          element={
+            <ProtectedRoute>
+              <SelectTechnicianPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/technician-abilities/:id"
+          element={
+            <ProtectedRoute>
+              <TechnicianAbilitiesPage />
             </ProtectedRoute>
           }
         />
