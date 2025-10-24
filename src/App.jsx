@@ -17,6 +17,9 @@ import EditUnitPage from "./pages/EditUnitPage.jsx";
 import EditReferenceStandardPage from "./pages/EditReferenceStandardPage.jsx";
 import AddReferenceStandardPage from "./pages/AddReferenceStandardPage.jsx";
 import ReferenceStandardsPage from "./pages/ReferenceStandardsPage.jsx";
+import EditRequesterPage from "./pages/EditRequesterPage.jsx";
+import AddRequesterPage from "./pages/AddRequesterPage.jsx";
+import RequestersPage from "./pages/RequestersPage.jsx";
 
 function App() {
   return (
@@ -52,6 +55,14 @@ function App() {
           element={
             <ProtectedRoute>
               <UnitsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/requesters"
+          element={
+            <ProtectedRoute>
+              <RequestersPage />
             </ProtectedRoute>
           }
         />
@@ -96,6 +107,14 @@ function App() {
           }
         />
         <Route
+          path="/add-requester"
+          element={
+            <ProtectedRoute>
+              <AddRequesterPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/add-reference-standard"
           element={
             <ProtectedRoute>
@@ -116,6 +135,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditUnitPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-requester/:id"
+          element={
+            <ProtectedRoute>
+              <EditRequesterPage />
             </ProtectedRoute>
           }
         />
