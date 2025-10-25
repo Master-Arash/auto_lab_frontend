@@ -56,10 +56,18 @@ export default function SelectTechnicianPage() {
               {t("select_technician")}
             </Typography>
           }
+          sx={{ flexShrink: 0 }}
         />
 
         <CardContent
-          sx={{ p: 3, flex: 1, display: "flex", flexDirection: "column" }}
+          sx={{
+            p: 3,
+            pt: 0,
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            minHeight: 0,
+          }}
         >
           <TextField
             label={t("search")}
@@ -80,8 +88,9 @@ export default function SelectTechnicianPage() {
 
           <Box
             sx={{
-              overflowY: "auto",
               flex: 1,
+              minHeight: 0,
+              overflowY: "auto",
               borderRadius: 2,
               border: "1px solid",
               borderColor: "divider",

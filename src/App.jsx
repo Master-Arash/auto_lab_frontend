@@ -22,6 +22,9 @@ import AddRequesterPage from "./pages/AddRequesterPage.jsx";
 import RequestersPage from "./pages/RequestersPage.jsx";
 import SelectTechnicianPage from "./pages/SelectTechnicianPage.jsx";
 import TechnicianAbilitiesPage from "./pages/TechnicianAbilitiesPage.jsx";
+import AddFormulaPage from "./pages/AddFormulaPage.jsx";
+import FormulasPage from "./pages/FormulasPage.jsx";
+import EditFormulaPage from "./pages/EditFormulaPage.jsx";
 
 function App() {
   return (
@@ -57,6 +60,14 @@ function App() {
           element={
             <ProtectedRoute>
               <UnitsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/formulas"
+          element={
+            <ProtectedRoute>
+              <FormulasPage />
             </ProtectedRoute>
           }
         />
@@ -101,6 +112,14 @@ function App() {
           }
         />
         <Route
+          path="/add-formula"
+          element={
+            <ProtectedRoute>
+              <AddFormulaPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/add-unit"
           element={
             <ProtectedRoute>
@@ -141,6 +160,14 @@ function App() {
           }
         />
         <Route
+          path="/edit-formula/:id"
+          element={
+            <ProtectedRoute>
+              <EditFormulaPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/edit-requester/:id"
           element={
             <ProtectedRoute>
@@ -163,7 +190,7 @@ function App() {
               <EditTestPage />
             </ProtectedRoute>
           }
-        />{" "}
+        />
         <Route
           path="/edit-sample/:id"
           element={

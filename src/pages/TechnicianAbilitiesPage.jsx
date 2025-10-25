@@ -78,7 +78,6 @@ export default function TechnicianAbilitiesPage() {
         },
       });
       setAbilities((prev) => prev.filter((a) => a.id !== abilityId));
-      // asdsadas;
     } catch (err) {
       console.error(err);
     }

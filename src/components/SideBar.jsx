@@ -20,6 +20,7 @@ import {
   Source,
   Contacts,
   Extension,
+  Functions,
   Brightness7,
   Brightness4,
 } from "@mui/icons-material";
@@ -135,6 +136,11 @@ export default function Sidebar() {
             text: t("technician_abilities"),
             icon: <Extension />,
             path: "/select-technician",
+          },
+          {
+            text: t("formulas"),
+            icon: <Functions />,
+            path: "/formulas",
           },
         ].map((item) => (
           <ListItemButton
