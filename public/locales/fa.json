@@ -38,6 +38,9 @@
   "currency": "ریال",
   "add_sample": "اضافه کردن نمونه",
   "add_test": "اضافه کردن آزمون",
+  "uncertainty": "عدم قطعیت",
+  "loq": "حد کمّی سازی (LOQ)",
+  "lod": "حد تشخیص (LOD)",
   "add_category": "اضافه کردن دسته بندی",
   "edit_category": "ویرایش دسته بندی",
   "edit_test": "ویرایش آزمون",
@@ -63,6 +66,9 @@
     "unique_error": "وجود دارد",
     "positive_int_error": "باید عددی طبیعی باشد",
     "int_error": "باید عددی صحیح باشد",
+    "decimal_error": "باید عددی اعشاری باشد",
+    "decimal_places_error": "باید تعداد اعشار کمتری داشته باشد",
+    "decimal_digits_error": "باید تعداد ارقام کمتری داشته باشد",
     "required": "لطفا مقدار را وارد کنید"
   }
 }

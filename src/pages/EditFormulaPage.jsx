@@ -74,10 +74,16 @@ export default function EditFormulaPage() {
         navigate(back_url, { replace: true });
       }
     }
+
     fetchData();
   }, [id, navigate, reset]);
 
   function hideAllLabels() {
+    setValue("label_a", "");
+    setValue("label_b", "");
+    setValue("label_c", "");
+    setValue("label_d", "");
+    setValue("label_e", "");
     setIsLabelAActive(false);
     setIsLabelBActive(false);
     setIsLabelCActive(false);

@@ -43,6 +43,9 @@ export default function TestsPage() {
         const row = {
           id: item.id,
           name: item.name,
+          uncertainty: item.uncertainty,
+          loq: item.loq,
+          lod: item.lod,
           code: item.code,
           isDeletable: item.is_deletable,
         };
@@ -82,6 +85,13 @@ export default function TestsPage() {
 
   const columns = [
     {
+      field: "name",
+      headerName: t("name"),
+      flex: 2,
+      sortable: false,
+      filterable: false,
+    },
+    {
       field: "code",
       headerName: t("code"),
       flex: 1,
@@ -89,9 +99,23 @@ export default function TestsPage() {
       filterable: false,
     },
     {
-      field: "name",
-      headerName: t("name"),
-      flex: 2,
+      field: "uncertainty",
+      headerName: t("uncertainty"),
+      flex: 1,
+      sortable: false,
+      filterable: false,
+    },
+    {
+      field: "loq",
+      headerName: t("loq"),
+      flex: 1,
+      sortable: false,
+      filterable: false,
+    },
+    {
+      field: "lod",
+      headerName: t("lod"),
+      flex: 1,
       sortable: false,
       filterable: false,
     },

@@ -28,6 +28,9 @@ export default function EditTestPage() {
     defaultValues: {
       name: "",
       code: "",
+      uncertainty: "",
+      loq: "",
+      lod: "",
       gov_price: 0,
       price: 0,
       duration: 0,
@@ -50,6 +53,9 @@ export default function EditTestPage() {
           id: rawData.id,
           name: rawData.name,
           code: rawData.code,
+          uncertainty: rawData.uncertainty,
+          loq: rawData.loq,
+          lod: rawData.lod,
           price: rawData.price,
           gov_price: rawData.gov_price,
           duration: rawData.duration,
@@ -121,6 +127,27 @@ export default function EditTestPage() {
                 autoFocus
               />
               <TextFieldElement name="code" label={t("code")} fullWidth />
+              <TextFieldElement
+                name="uncertainty"
+                label={t("uncertainty")}
+                type="number"
+                inputProps={{ step: "0.0001" }}
+                fullWidth
+              />
+              <TextFieldElement
+                name="loq"
+                label={t("loq")}
+                type="number"
+                inputProps={{ step: "0.0001" }}
+                fullWidth
+              />
+              <TextFieldElement
+                name="lod"
+                label={t("lod")}
+                type="number"
+                inputProps={{ step: "0.0001" }}
+                fullWidth
+              />
               <TextFieldElement
                 type="number"
                 name="price"

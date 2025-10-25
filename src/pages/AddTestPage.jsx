@@ -24,6 +24,9 @@ export default function AddTestPage() {
     defaultValues: {
       name: "",
       code: "",
+      uncertainty: "",
+      loq: "",
+      lod: "",
       price: 0,
       gov_price: 0,
       duration: 1,
@@ -86,6 +89,27 @@ export default function AddTestPage() {
                 autoFocus
               />
               <TextFieldElement name="code" label={t("code")} fullWidth />
+              <TextFieldElement
+                name="uncertainty"
+                label={t("uncertainty")}
+                type="number"
+                inputProps={{ step: "0.0001" }}
+                fullWidth
+              />
+              <TextFieldElement
+                name="loq"
+                label={t("loq")}
+                type="number"
+                inputProps={{ step: "0.0001" }}
+                fullWidth
+              />
+              <TextFieldElement
+                name="lod"
+                label={t("lod")}
+                type="number"
+                inputProps={{ step: "0.0001" }}
+                fullWidth
+              />
               <TextFieldElement
                 type="number"
                 name="price"
